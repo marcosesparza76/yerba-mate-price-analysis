@@ -115,13 +115,32 @@ An analysis of the open-source **CockroachDB** repository confirms the use of th
 
 ---
 
+## 🛠️ Technical Challenges & Troubleshooting
+
+During the development of the data collection and ETL pipeline, several real-world technical obstacles were identified and resolved:
+
+1. **Dynamic Client-Side Rendering (CSR) & Endpoint Redirection:**
+   * *Issue:* Initial HTTP `GET` requests to Jumbo's internal VTEX routing endpoint (`_v/segment/routing/vtex.store@2.x/...`) triggered `JSONDecodeError` or redirected to the main homepage because prices are loaded dynamically via JavaScript and require active session cookies.
+   * *Solution:* Migrated the extraction module (`scraper_jumbo.py`) from static `requests` to **Playwright** (headless Chromium), simulating full browser navigation with explicit category query parameters (`initialMap`, `map`, `query`) and progressive scrolling to render all product cards.
+
+2. **Unstructured Product Card Layout & UI Noise:**
+   * *Issue:* Product cards mixed brand names, full descriptions, promotional badges, and UI buttons (`"Ver Producto"`, `"Compra rápida"`), occasionally inverting brand and product fields or capturing non-target carousel items.
+   * *Solution:* Implemented a text-filtering pipeline that strips UI labels, selects the longest string as the product title, enforces a strict keyword filter (`"yerba"`), and uses regular expressions (`re`) to extract package weights (`500g`, `550g`, `1kg`) for accurate `ARS/kg` normalization.
+
+3. **Multi-Source Integration & Inflation Deflation:**
+   * *Issue:* Official reports from CEPA, Ministry of Deregulation/INYM, and INDEC (IPC) are published across different formats and nominal scales.
+   * *Solution:* Created `integrar_fuentes.py` to standardize periods (`YYYY-MM`), merge retail shelf prices with farm-gate leaf prices (`hoja verde`), calculate producer share percentages, and deflate nominal values into constant currency (Base Dec-2023 = 100).
+
+---
+
 ## 📈 Key Findings & Visualizations
 
-* **Average Retail Price:** $6,523.26 ARS/kg (Median: $5,472.82 ARS/kg across 18 presentations).
-* **Price Dispersion:** Ranges from **$3,396.25/kg** (*Nobleza Gaucha*) to **$15,800.00/kg** (*Canarias*).
+* **Current Retail Dispersion (Jumbo):** Average price of **$6,523.26 ARS/kg** (Median: **$5,472.82 ARS/kg** across 18 presentations), ranging from **$3,396.25/kg** (*Nobleza Gaucha*) to **$15,800.00/kg** (*Canarias*).
+* **Deregulation & Producer Share Impact:** Following **DNU 70/2023**, real shelf prices peaked in early 2024 before stabilizing, while the primary producer's share of the final retail price contracted from **34.9%** (Oct 2023) to **13.3%–16.1%** (2025–2026).
 
 ![Brand Price Ranking](reports/figures/01_ranking_precios_marca.png)
 ![Historical Price Evolution](reports/figures/02_evolucion_historica_dnu.png)
+![Producer Share vs Real Retail Price](reports/figures/03_brecha_productor_ipc.png)
 
 ---
 

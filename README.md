@@ -115,6 +115,16 @@ An analysis of the open-source **CockroachDB** repository confirms the use of th
 
 ---
 
+## 📈 Key Findings & Visualizations
+
+* **Average Retail Price:** $6,523.26 ARS/kg (Median: $5,472.82 ARS/kg across 18 presentations).
+* **Price Dispersion:** Ranges from **$3,396.25/kg** (*Nobleza Gaucha*) to **$15,800.00/kg** (*Canarias*).
+
+![Brand Price Ranking](reports/figures/01_ranking_precios_marca.png)
+![Historical Price Evolution](reports/figures/02_evolucion_historica_dnu.png)
+
+---
+
 ## 🤝 Contributing & License
 
 Contributions, issues, and feature requests are welcome. Feel free to check the issues page or submit a pull request.  

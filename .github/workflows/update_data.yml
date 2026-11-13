@@ -27,14 +27,21 @@ jobs:
       - name: 3. Instalar dependencias y navegador Chromium
         run: |
           python -m pip install --upgrade pip
-          pip install pandas matplotlib playwright
+          pip install pandas matplotlib playwright requests
           python -m playwright install chromium --with-deps
 
-      - name: 4. Ejecutar pipeline completo (Scraping + ETL + Integración)
+      - name: 4. Ejecutar pipeline completo y enviar reporte
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
         run: |
           python src/scraper_jumbo.py
           python src/etl_pipeline.py
           python src/integrar_fuentes.py
+          python src/enviar_reporte.py
 
       - name: 5. Guardar nuevos datos y gráficos en el repositorio
         run: |
@@ -43,4 +50,3 @@ jobs:
           git add data/ reports/
           git commit -m "chore: actualizacion automatica de precios y graficos" || echo "Sin cambios nuevos para guardar"
           git push
-

@@ -1,11 +1,3 @@
-# 🧉 Yerba Mate Price Tracker & Econometric Analysis (Argentina)
-
-![Python](https://shields.io)
-![Pandas](https://shields.io)
-![PowerBI](https://shields.io)
-![Status](https://shields.io)
-![License](https://shields.io)
-
 ## 📋 Overview
 
 **Yerba Mate Price Tracker** is an end-to-end Data Science and Business Intelligence project designed to collect, process, and analyze the historical and real-time price evolution of Yerba Mate in Argentina. 

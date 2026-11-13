@@ -5,12 +5,12 @@ from datetime import datetime
 import os
 
 # URL del endpoint de catálogo de Jumbo Argentina (Categoría: Almacén / Desayuno y Merienda / Yerbas)
-API_URL = "https://jumbo.com.ar"
+API_URL = "https://www.jumbo.com.ar/api/catalog_system/pub/products/search?fq=C:143&from=0&to=49"
 
-# Parámetros para traer los primeros 50 productos (del 0 al 49)
+# Parámetros para traer los primeros 100 productos (del 0 al 99)
 params = {
     "_from": 0,
-    "_to": 49
+    "_to": 99
 }
 
 headers = {

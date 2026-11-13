@@ -1,9 +1,0 @@
-﻿anio_mes,precio_hoja_verde_kg,precio_gondola_ref_kg,participacion_productor_pct,regimen,var_mensual_ipc_pct,indice_ipc,precio_gondola_real_dic23,precio_hoja_verde_real_dic23
-2023-10,250.0,2150.0,34.9,Regulado (Res. 406/23),8.3,71.1,3023.91,351.62
-2023-12,250.0,2980.0,25.2,Inicio DNU 70/2023,25.5,100.0,2980.0,250.0
-2024-03,370.0,4100.0,27.1,Transición INYM,11.0,151.6,2704.49,244.06
-2024-06,280.0,4650.0,18.1,Desregulado,4.6,179.8,2586.21,155.73
-2024-09,265.0,4890.0,16.3,Desregulado (Inf. Min.),3.5,201.6,2425.6,131.45
-2025-01,230.0,5180.0,13.3,Desregulado (Inf. CEPA),2.2,222.6,2327.04,103.32
-2026-06,280.0,5211.0,16.1,Desregulado (CEPA 2026),1.9,333.8,1561.11,83.88
-2026-11,290.0,5472.82,15.9,Muestreo Vivo Jumbo (Mediana),,366.6,1492.86,79.11

@@ -203,6 +203,45 @@ Building this system followed an **iterative engineering cycle** rather than a l
 
 ---
 
+## ❓ Technical FAQ (Frequently Asked Questions)
+
+<details>
+<summary><strong>1. Why did you choose Playwright instead of lighter libraries like Requests or BeautifulSoup?</strong></summary>
+<br>
+Modern supermarket e-commerce platforms (such as VTEX IO architectures) rely on <strong>Client-Side Rendering (CSR)</strong>. Standard static HTTP GET requests return an empty HTML shell without product prices because data is injected dynamically via JavaScript. <strong>Playwright</strong> launches a headless Chromium browser, executes client-side scripts, simulates progressive scrolling, and waits for visible product containers before extracting data.
+</details>
+
+<details>
+<summary><strong>2. Why is the Median used instead of the Arithmetic Mean as the primary benchmark?</strong></summary>
+<br>
+Retail shelf prices exhibit strong positive skewness caused by imported or ultra-premium cuts (e.g., Uruguayan-style brands exceeding $15,000 ARS/kg compared to a mass-market baseline around $5,200 ARS/kg). The arithmetic mean gets pulled upward by these outliers, whereas the <strong>median ($5,289.62 ARS/kg across 236 SKUs)</strong> provides a statistically robust measure of what a typical consumer actually pays.
+</details>
+
+<details>
+<summary><strong>3. How are API tokens and credentials secured in a public GitHub repository?</strong></summary>
+<br>
+No credentials or tokens are ever hardcoded in the source code. Sensitive keys (<code>TELEGRAM_TOKEN</code> and <code>TELEGRAM_CHAT_ID</code>) are stored encrypted inside <strong>GitHub Repository Secrets</strong>. During scheduled GitHub Actions runs, these secrets are injected temporarily into memory as environment variables (<code>os.getenv()</code>) and wiped immediately after execution.
+</details>
+
+<details>
+<summary><strong>4. What were the main Data Cleaning challenges when merging three different retail chains?</strong></summary>
+<br>
+Each supermarket chain structures its DOM and product labels differently, requiring three specific normalization rules:
+<ul>
+  <li><strong>UI & Accessory Noise Filtering:</strong> Excluding non-target items (thermoses, empty tins, tea bags) and financing buttons (<code>"Ver planes de cuotas"</code>).</li>
+  <li><strong>Hidden Unicode Sanitization:</strong> Stripping non-breaking space characters (<code>\xa0</code>) inserted between currency symbols and numbers.</li>
+  <li><strong>Unit Standardization:</strong> Using Regular Expressions (<code>re</code>) to parse varied package weights (<code>250g</code>, <code>500g</code>, <code>550g</code>, <code>1kg</code>) into a unified <code>ARS/kg</code> metric.</li>
+</ul>
+</details>
+
+<details>
+<summary><strong>5. Does the system currently perform Machine Learning forecasting?</strong></summary>
+<br>
+Currently, the pipeline performs <strong>descriptive analytics, multi-retailer benchmarking, and econometric nowcasting</strong> (deflating nominal prices via INDEC's IPC to measure primary producer share contraction from 34.9% to 16.4% post-DNU 70/2023). Formal time-series forecasting models (such as <strong>SARIMA or Prophet</strong>) are scheduled for the next phase once the automated cron job accumulates several months of high-frequency daily historical snapshots.
+</details>
+
+---
+
 ## 🤝 Contributing & License
 
 Contributions, issues, and feature requests are welcome. Feel free to check the issues page or submit a pull request.  

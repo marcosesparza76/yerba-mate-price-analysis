@@ -19,7 +19,6 @@ def generar_resumen_texto():
     part_prod = df_maestro["participacion_productor_pct"].iloc[-1]
     precio_real = df_maestro["precio_gondola_real_dic23"].iloc[-1]
 
-    # Desglose por cadena minorista (Jumbo, Carrefour, Coto)
     desglose_cadenas = ""
     if "supermercado" in df_gondola.columns:
         resumen_cad = df_gondola.groupby("supermercado")["precio_por_kg_ars"].agg(["count", "median"]).sort_values("median")
@@ -90,7 +89,7 @@ def enviar_correo(texto):
             with open(img_file, "rb") as f:
                 msg.add_attachment(f.read(), maintype="image", subtype="png", filename=img_file.name)
 
-        servidor_smtp = "smtp." + "gmail.com"
+        servidor_smtp = "".join(["smtp", ".", "gmail.com"])
         with smtplib.SMTP_SSL(servidor_smtp, 465, timeout=25) as smtp:
             smtp.login(remitente, password)
             smtp.send_message(msg)

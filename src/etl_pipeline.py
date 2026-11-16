@@ -149,8 +149,8 @@ def ejecutar_etl_y_graficos():
 
     # Resumen en consola
     resumen_cadenas = df_gondola.groupby("supermercado")["precio_por_kg_ars"].agg(["count", "mean", "median"]).round(2)
-    marca_min = df_marcas.iloc["marca"]
-    precio_min = df_marcas.iloc["precio_por_kg_ars"]
+    marca_min = df_marcas["marca"].iat[0]
+    precio_min = df_marcas["precio_por_kg_ars"].iat[0]
     marca_max = df_marcas.iloc[-1]["marca"]
     precio_max = df_marcas.iloc[-1]["precio_por_kg_ars"]
 

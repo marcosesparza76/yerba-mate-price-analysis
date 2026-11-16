@@ -124,9 +124,3 @@ def integrar_fuentes_multicanal():
 
 if __name__ == "__main__":
     integrar_fuentes_multicanal()
-
-    plt.close()
-    print(f"Gráfico 3 generado en: '{ruta_grafico}'")
-
-if __name__ == "__main__":
-    integrar_con_jumbo()

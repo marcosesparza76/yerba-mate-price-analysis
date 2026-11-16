@@ -18,14 +18,15 @@ def generar_resumen_texto():
     max_row = df_gondola.loc[df_gondola["precio_por_kg_ars"].idxmax()]
     part_prod = df_maestro["participacion_productor_pct"].iloc[-1]
 
-    mensaje = (
+        mensaje = (
         f"🧉 REPORTE AUTOMÁTICO YERBA MATE ({fecha})\n\n"
         f"• Presentaciones relevadas: {len(df_gondola)}\n"
         f"• Precio promedio / kg: ${prom:,.2f}\n"
         f"• Precio mediano / kg: ${med:,.2f}\n"
         f"• Más económica: {min_row['marca']} (${min_row['precio_por_kg_ars']:,.2f}/kg)\n"
         f"• Más costosa: {max_row['marca']} (${max_row['precio_por_kg_ars']:,.2f}/kg)\n"
-        f"• Participación productor en góndola: {part_prod:.1f}%\n"
+        f"• Participación productor en góndola: {part_prod:.1f}%\n\n"
+        f"🔗 Ver tablero interactivo: https://yerba-mate-price-analysis-monitor.streamlit.app/"
     )
     return mensaje
 

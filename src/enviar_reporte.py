@@ -39,12 +39,10 @@ def enviar_telegram(texto):
         print("Telegram no configurado (faltan variables TELEGRAM_TOKEN / TELEGRAM_CHAT_ID).")
         return
 
-    # Enviar texto resumen
     url_msg = f"https://telegram.org{token}/sendMessage"
     resp_msg = requests.post(url_msg, data={"chat_id": chat_id, "text": texto})
     print(f"Mensaje Telegram estado: {resp_msg.status_code}")
 
-    # Enviar los 3 gráficos adjuntos
     figuras_dir = BASE_DIR / "reports" / "figures"
     url_photo = f"https://telegram.org{token}/sendPhoto"
     for img_path in sorted(figuras_dir.glob("*.png")):
@@ -66,13 +64,12 @@ def enviar_correo(texto):
     msg["To"] = destinatario
     msg.set_content(texto)
 
-    # Adjuntar los 3 gráficos PNG
     figuras_dir = BASE_DIR / "reports" / "figures"
     for img_file in sorted(figuras_dir.glob("*.png")):
         with open(img_file, "rb") as f:
             msg.add_attachment(f.read(), maintype="image", subtype="png", filename=img_file.name)
 
-    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
+    with smtplib.SMTP_SSL("://gmail.com", 465) as smtp:
         smtp.login(remitente, password)
         smtp.send_message(msg)
     print("Correo electrónico enviado exitosamente.")

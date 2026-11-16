@@ -32,28 +32,30 @@ This project integrates historical datasets, official government reports, and li
 
 Following standard Data Science repository conventions, the project is organized modularly:
 
-```text
-yerba-mate-price-analysis/
-├── .github/
-│   └── workflows/
-│       └── update_data.yml           # Automated CI/CD pipeline (runs Mon & Thu)
-├── dashboard/
-│   └── app.py                        # Interactive Streamlit & Plotly web dashboard
-├── data/
-│   ├── raw/                          # Raw scrapes (Jumbo) & official datasets (INDEC, CEPA)
-│   └── processed/                    # Cleaned, normalized (ARS/kg) & IPC-deflated datasets
-├── notebooks/
-│   └── 01_eda_historical.ipynb       # Exploratory Data Analysis notebooks
-├── reports/
-│   └── figures/                      # Automated statistical charts (PNG)
-├── src/
-│   ├── scraper_jumbo.py              # Headless browser scraper (Playwright)
-│   ├── etl_pipeline.py               # Unit normalization & statistical reporting
-│   ├── integrar_fuentes.py           # Multi-source join (Jumbo + INDEC IPC + CEPA)
-│   └── enviar_reporte.py             # Automated Telegram & Email alert dispatcher
-├── requirements.txt                  # Python dependencies
-└── README.md                         # Project documentation
-```
+    yerba-mate-price-analysis/
+    ├── .github/
+    │   └── workflows/
+    │       └── update_data.yml           # Automated CI/CD pipeline (runs Mon & Thu)
+    ├── .streamlit/
+    │   └── config.toml               # Executive dark theme configuration
+    ├── dashboard/
+    │   └── app.py                        # Interactive Streamlit & Plotly web dashboard
+    ├── data/
+    │   ├── raw/                          # Raw scrapes (Jumbo, Carrefour, Coto) & official CSVs (INDEC, CEPA)
+    │   └── processed/                    # Cleaned, normalized (ARS/kg) & IPC-deflated datasets
+    ├── notebooks/
+    │   └── 01_eda_historical.ipynb       # Exploratory Data Analysis notebooks
+    ├── reports/
+    │   └── figures/                      # Automated statistical charts (4 PNGs)
+    ├── src/
+    │   ├── scraper_jumbo.py              # Headless browser scraper for Jumbo (Playwright)
+    │   ├── scraper_carrefour.py          # Headless browser scraper for Carrefour (Playwright)
+    │   ├── scraper_coto.py               # Headless browser scraper for Coto (Playwright)
+    │   ├── etl_pipeline.py               # Multi-retailer normalization & statistical charts
+    │   ├── integrar_fuentes.py           # Multi-source join (3 Chains + INDEC IPC + CEPA)
+    │   └── enviar_reporte.py             # Automated Telegram & Email alert dispatcher
+    ├── requirements.txt                  # Python dependencies
+    └── README.md                         # Project documentation
 
 ---
 

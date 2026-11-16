@@ -1,7 +1,5 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import glob
-import os
 from pathlib import Path
 
 # Detecta automáticamente la carpeta raíz del proyecto (un nivel arriba de /src)
@@ -52,26 +50,27 @@ def crear_datasets_oficiales_raw():
     print(f"Archivos oficiales creados en '{raw_dir}': ipc_indec.csv y cepa_cadena_valor.csv")
     return df_ipc, df_cepa
 
-def integrar_con_jumbo():
+def integrar_fuentes_multicanal():
     df_ipc, df_cepa = crear_datasets_oficiales_raw()
 
-    # Cargar el último scrape real de Jumbo desde la raíz
-    patron_jumbo = str(BASE_DIR / "data" / "raw" / "jumbo_yerbas_*.csv")
-    archivos_jumbo = glob.glob(patron_jumbo)
-    if not archivos_jumbo:
-        raise FileNotFoundError("No se encontró el archivo de Jumbo en data/raw/.")
-    df_jumbo = pd.read_csv(max(archivos_jumbo, key=os.path.getctime))
+    # Cargar el dataset unificado generado por etl_pipeline.py (Jumbo + Carrefour + Coto)
+    processed_dir = BASE_DIR / "data" / "processed"
+    ruta_gondola = processed_dir / "yerba_gondola_procesada.csv"
+    if not ruta_gondola.exists():
+        raise FileNotFoundError("No se encontró 'yerba_gondola_procesada.csv'. Ejecutá primero etl_pipeline.py.")
+    
+    df_gondola = pd.read_csv(ruta_gondola)
 
-    # Calcular promedio actual de Jumbo y agregarlo como punto de cierre a la serie
-    promedio_jumbo = round(df_jumbo["precio_por_kg_ars"].mean(), 2)
-    mediana_jumbo = round(df_jumbo["precio_por_kg_ars"].median(), 2)
+    # Calcular mediana multicanal actual y agregarla como punto de cierre a la serie
+    mediana_multicanal = round(df_gondola["precio_por_kg_ars"].median(), 2)
+    cadenas_activas = df_gondola["supermercado"].nunique() if "supermercado" in df_gondola.columns else 1
 
     fila_actual = pd.DataFrame([{
         "anio_mes": "2026-11",
         "precio_hoja_verde_kg": 290.0,
-        "precio_gondola_ref_kg": mediana_jumbo,
-        "participacion_productor_pct": round((290.0 * 3 / mediana_jumbo) * 100, 1),
-        "regimen": "Muestreo Vivo Jumbo (Mediana)"
+        "precio_gondola_ref_kg": mediana_multicanal,
+        "participacion_productor_pct": round((290.0 * 3 / mediana_multicanal) * 100, 1),
+        "regimen": f"Muestreo Vivo ({cadenas_activas} Cadenas)"
     }])
 
     df_serie_completa = pd.concat([df_cepa, fila_actual], ignore_index=True)
@@ -87,17 +86,16 @@ def integrar_con_jumbo():
     df_maestro["precio_gondola_real_dic23"] = round((df_maestro["precio_gondola_ref_kg"] / df_maestro["indice_ipc"]) * 100, 2)
     df_maestro["precio_hoja_verde_real_dic23"] = round((df_maestro["precio_hoja_verde_kg"] / df_maestro["indice_ipc"]) * 100, 2)
 
-    processed_dir = BASE_DIR / "data" / "processed"
     figures_dir = BASE_DIR / "reports" / "figures"
     processed_dir.mkdir(parents=True, exist_ok=True)
     figures_dir.mkdir(parents=True, exist_ok=True)
 
     ruta_maestro = processed_dir / "dataset_maestro_yerba.csv"
     df_maestro.to_csv(ruta_maestro, index=False, encoding="utf-8-sig")
-    print(f"\nDataset Maestro unificado guardado en: '{ruta_maestro}'")
+    print(f"\nDataset Maestro Multicanal guardado en: '{ruta_maestro}'")
     print(df_maestro[["anio_mes", "precio_hoja_verde_kg", "precio_gondola_ref_kg", "participacion_productor_pct", "precio_gondola_real_dic23"]])
 
-    # Gráfico 3: Brecha Origen vs. Góndola y Participación del Productor (CEPA + Jumbo)
+    # Gráfico 3: Brecha Origen vs. Góndola y Participación del Productor (CEPA + Multicanal)
     fig, ax1 = plt.subplots(figsize=(10, 5.5), dpi=150)
 
     color_barras = "#2E86C1"
@@ -117,10 +115,16 @@ def integrar_con_jumbo():
     ax2.set_ylim(1000, 4000)
     ax2.tick_params(axis="y", labelcolor=color_linea)
 
-    plt.title("Impacto Desregulación: Precio Real en Góndola (IPC) vs. Participación del Productor (CEPA + Jumbo)", fontsize=11, fontweight="bold", pad=12)
+    plt.title("Impacto Desregulación: Precio Real en Góndola (IPC) vs. Participación del Productor (CEPA + 3 Cadenas)", fontsize=10.5, fontweight="bold", pad=12)
     plt.tight_layout()
     ruta_grafico = figures_dir / "03_brecha_productor_ipc.png"
     plt.savefig(ruta_grafico)
+    plt.close()
+    print(f"Gráfico 3 multicanal generado en: '{ruta_grafico}'")
+
+if __name__ == "__main__":
+    integrar_fuentes_multicanal()
+
     plt.close()
     print(f"Gráfico 3 generado en: '{ruta_grafico}'")
 

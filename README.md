@@ -157,8 +157,8 @@ During the development of the data collection and ETL pipeline, several real-wor
 * **Cross-Chain Price Positioning:** **Carrefour** lidera en competitividad (**$5,199.00/kg** en 95 SKUs), seguido por **Coto** (**$5,380.00/kg** en 123 SKUs) y **Jumbo** (**$5,472.82/kg** en 18 SKUs, con mayor presencia de marcas premium).
 * **Deregulation & Producer Share Impact:** Tras el **DNU 70/2023**, los precios reales sestabilizaron tras un pico en 2024, mientras que la participación del productor primario cayó del **34.9%** (Oct 2023) al **13.3%–16.4%** (2025–2026).
 
-![Brand Price Ranking]((https://github.com/marcosesparza76/yerba-mate-price-analysis/blob/main/reports/figures/01_ranking_precios_marca.png))
-![Historical Price Evolution](https://github.com/marcosesparza76/yerba-mate-price-analysis/blob/main/reports/figures/02_evolucion_historica_dnu.png))
+![Brand Price Ranking](https://github.com/marcosesparza76/yerba-mate-price-analysis/blob/main/reports/figures/01_ranking_precios_marca.png)
+![Historical Price Evolution](https://github.com/marcosesparza76/yerba-mate-price-analysis/blob/main/reports/figures/02_evolucion_historica_dnu.png)
 ![Producer Share vs Real Retail Price](https://github.com/marcosesparza76/yerba-mate-price-analysis/blob/main/reports/figures/03_brecha_productor_ipc.png)
 ![Retail Chain Comparison](https://github.com/marcosesparza76/yerba-mate-price-analysis/blob/main/reports/figures/04_comparativa_supermercados.png)
 

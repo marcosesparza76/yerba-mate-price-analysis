@@ -53,7 +53,6 @@ yerba-mate-price-analysis/
 │   └── enviar_reporte.py             # Automated Telegram & Email alert dispatcher
 ├── requirements.txt                  # Python dependencies
 └── README.md                         # Project documentation
-
 ```
 
 ---

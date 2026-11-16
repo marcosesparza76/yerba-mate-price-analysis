@@ -162,6 +162,39 @@ During the development of the data collection and ETL pipeline, several real-wor
 
 ---
 
+---
+
+## 🔬 Methodological Scope, Data Provenance & Limitations
+
+To ensure analytical rigor and transparency, the historical integration module (`integrar_fuentes.py`) adheres to strict methodological boundaries:
+
+* **Data Provenance & Triangulation:** Official macroeconomic baselines are sourced from **INDEC** (National Consumer Price Index - IPC, Base Dec 2016) to deflate nominal values, while primary production costs (`hoja verde`) and value-chain spreads are triangulated from **Centro CEPA** sector reports (Jan 2025 & June 2026) and **INYM / Ministry of Deregulation** statistical releases.
+* **Temporal Window Selection (2023–2026):** The integrated series intentionally focuses on the **October 2023 – November 2026** window to isolate the structural regime change triggered by **DNU 70/2023** (December 2023), capturing both the pre-deregulation baseline (regulated under Resolution 406/2023) and the subsequent free-market stabilization phase.
+* **Methodological Approach:** Farm-to-retail participation percentages are calculated using standard industrial conversion ratios (~3.0 kg of green leaf per 1.0 kg of processed retail yerba mate), comparing deflated series in constant December 2023 currency (`ARS Dic-23 = 100`).
+
+---
+
+## 📉 Statistical Projections & Analytical Disclaimer
+
+While this repository tracks historical trends and real-time retail dispersion, **it does not perform deterministic forecasting or speculative "futurology."**
+
+* **Scenario Estimation:** Any forward-looking references or trend lines derived from the ETL pipeline represent statistical extrapolations based on recent monthly IPC inertia (e.g., ~1.9% monthly baseline) and current retail medians.
+* **Disclaimer:** These figures are **analytical estimates** intended strictly for academic and exploratory monitoring. Real-world retail prices remain subject to exogenous macroeconomic shocks, seasonal harvest yields (Misiones/Corrientes), and commercial pricing strategies across retail chains.
+
+---
+
+## 🧠 Process Evaluation & Metacognition (Iterative Evolution)
+
+Building this system followed an **iterative engineering cycle** rather than a linear workflow:
+
+1. **From Static Requests to Headless Automation:** Initial prototypes assumed static JSON endpoints would suffice. Testing against live retail infrastructure forced a pivot to **Playwright** and DOM-level text filtering, reinforcing the importance of empirical validation over assumptions.
+2. **From Local Scripts to Cloud CI/CD:** Moving from manual local execution (`src/`) to relative path resolution (`BASE_DIR`) and scheduled **GitHub Actions** transformed a one-off analysis into a self-updating monitoring system with real-time **Telegram** alerting.
+3. **Future Roadmap & Continuous Improvement:**
+   * *Multi-Retailer Expansion:* Incorporating additional supermarket chains (e.g., Carrefour, Coto) to eliminate single-retailer bias.
+   * *Time-Series Modeling:* Once the automated cron job accumulates 6+ months of high-frequency daily/weekly scrapes, implementing formal **ARIMA / Prophet** models with confidence intervals to evaluate seasonal price elasticity.
+
+---
+
 ## 🤝 Contributing & License
 
 Contributions, issues, and feature requests are welcome. Feel free to check the issues page or submit a pull request.  

@@ -1,30 +1,31 @@
 ## 📋 Overview
 
-**Yerba Mate Price Tracker** is an end-to-end Data Science and Business Intelligence project designed to collect, process, and analyze the historical and real-time price evolution of Yerba Mate in Argentina. 
-> 🚀 **Live Interactive Dashboard:** Explore real-time shelf prices, brand dispersion, and inflation-adjusted historical trends at **[Yerba Mate Price Monitor (Streamlit App)](https://yerba-mate-price-analysis-monitor.streamlit.app)**.
+**Yerba Mate Price Tracker** is an automated, end-to-end Data Engineering and Econometric Analytics pipeline designed to collect, process, and monitor the historical and real-time multi-retailer price evolution of Yerba Mate in Argentina (**Jumbo**, **Carrefour**, and **Coto**).
 
-The project evaluates the market impact of the **DNU 70/2023** deregulation (which eliminated price controls previously set by the *National Institute of Yerba Mate - INYM*), measures the price gap between primary producers and retail shelves, and compares nominal price increases against general inflation using the **Consumer Price Index (IPC - INDEC)**.
+> 🚀 **Live Executive Dashboard:** Explore real-time cross-chain prices (236+ SKUs), brand dispersion, and inflation-adjusted historical trends at **[Yerba Mate Price Monitor (Streamlit App)](https://streamlit.app)**.
+
+The project evaluates the structural market impact of the **DNU 70/2023** deregulation (which eliminated minimum price controls previously set by the *National Institute of Yerba Mate - INYM*), measures the value-chain spread between primary producers (`hoja verde`) and retail shelves, and deflates nominal prices into constant currency using the official **Consumer Price Index (IPC - INDEC)**.
 
 ---
 
 ## 🎯 Key Objectives
 
-1. **Historical & Structural Analysis:** Model weekly and monthly price fluctuations from 2015 to 2025 using official and econometric datasets.
-2. **Deregulation Impact Assessment:** Compare real prices (in constant currency) before and after December 2023.
-3. **Real-Time Retail Monitoring:** Automate current shelf-price extraction via web scraping (targeting major retail chains such as **Jumbo Argentina**) standardized per kilogram (`ARS/kg`).
-4. **Interactive Visualization:** Build an executive Power BI dashboard and exploratory Python notebooks to detect price anomalies and brand dispersion.
+1. **Historical & Structural Analysis:** Model weekly and monthly price fluctuations from 2015 to 2026 using official macroeconomic and sector datasets (**INDEC**, **CEPA**, **INYM / Ministry of Deregulation**).
+2. **Deregulation Impact Assessment:** Compare inflation-adjusted retail prices (in constant currency) and primary producer shares before and after **DNU 70/2023** (December 2023).
+3. **Automated Multi-Retailer Monitoring:** Automate daily shelf-price extraction via headless web scraping (**Playwright**) across three major supermarket chains (**Jumbo**, **Carrefour**, and **Coto**), standardized per kilogram (`ARS/kg`).
+4. **Executive Visualization & CI/CD Alerting:** Deploy an interactive **Streamlit & Plotly** executive web dashboard alongside automated **GitHub Actions** workflows and **Telegram** reporting to track brand dispersion and cross-chain pricing anomalies.
 
 ---
 
 ## 📊 Data Sources & References
 
-This project integrates historical datasets, official government reports, and live web scraping:
+This project integrates historical datasets, official government and sector reports, and live multi-retailer web scraping:
 
-* **Ministry of Deregulation and State Transformation (Sept 2024):** Constant-peso price evolution in CABA, traded volumes, and post-DNU 70/2023 market deregulation metrics.
+* **Ministry of Deregulation and State Transformation (Sept 2024):** Constant-peso price evolution in CABA, traded volumes, and post-**DNU 70/2023** market deregulation metrics.
 * **RIVAR Econometric Study (2023):** High-frequency weekly price dataset covering +300 Yerba Mate presentations (2015–2021), accounting for product attributes, seasonality, and exchange rate variations.
-* **CEPA Report on the Yerba Mate Complex (Jan 2025):** Production figures, domestic consumption, exports, and farm-to-retail price spreads.
-* **INDEC (IPC):** Official Consumer Price Index used to deflate nominal prices into real terms.
-* **Live Retail Scraping (Jumbo Argentina):** Automated extraction of current product names, brands, weights (500g / 1kg), and retail prices.
+* **Centro CEPA Reports on the Yerba Mate Complex (Jan 2025 & June 2026):** Production figures, domestic consumption, exports, green leaf (`hoja verde`) prices, and farm-to-retail value chain spreads.
+* **INDEC (IPC):** Official National Consumer Price Index used to deflate nominal prices into constant currency (`Base Dec-2023 = 100`).
+* **Live Multi-Retailer Scraping (Jumbo, Carrefour & Coto Argentina):** Automated headless extraction (**Playwright**) of 236+ active SKUs, capturing product descriptions, brands, package weights (`250g`, `500g`, `550g`, `1kg`), and standardized shelf prices (`ARS/kg`).
 
 ---
 
@@ -88,32 +89,34 @@ To run this project locally, ensure you have **Python 3.10+** installed.
 
 ## 🚀 Usage
 
-1. **Run the Web Scraper (Live Data Collection):**
-   ```bash
-   python src/scraper_jumbo.py
-   ```
-   *Outputs a timestamped CSV file inside `data/raw/` containing current shelf prices.*
+1. **Run the Multi-Retailer Web Scrapers (Live Data Collection):**
 
-2. **Execute the ETL & Normalization Pipeline:**
-   ```bash
-   python src/etl_pipeline.py
-   ```
-   *Standardizes all package weights to `Price per Kg` and merges historical series with IPC inflation data into `data/processed/`.*
+       python src/scraper_jumbo.py
+       python src/scraper_carrefour.py
+       python src/scraper_coto.py
+
+   *Outputs timestamped CSV files inside `data/raw/` containing current shelf prices across all three retail chains (~236 SKUs).*
+
+2. **Execute the Multi-Retailer ETL & Normalization Pipeline:**
+
+       python src/etl_pipeline.py
+
+   *Unifies all three retail datasets, standardizes package weights to Price per Kg (`ARS/kg`), and generates statistical charts (`01`, `02`, and `04`) into `data/processed/` and `reports/figures/`.*
 
 3. **Integrate Official Sources (INDEC IPC & CEPA):**
-   ```bash
-   python src/integrar_fuentes.py
-   ```
-   *Merges live retail prices with official Consumer Price Index (IPC) and farm-gate leaf prices (`hoja verde`) into `data/processed/dataset_maestro_yerba.csv`.*
 
-4. **Launch the Interactive Web Dashboard:**
-   ```bash
-   python -m streamlit run dashboard/app.py
-   ```
-   *Opens the local Streamlit web application with dynamic brand filters, KPIs, and interactive Plotly charts.*
+       python src/integrar_fuentes.py
+
+   *Merges the multi-retailer median with official Consumer Price Index (`IPC`) and farm-gate leaf prices (`hoja verde`) into `data/processed/dataset_maestro_yerba.csv` and generates Chart `03`.*
+
+4. **Launch the Executive Web Dashboard:**
+
+       python -m streamlit run dashboard/app.py
+
+   *Opens the local Streamlit web application with dark boardroom styling, multi-chain filters, KPIs, and interactive Plotly charts.*
 
 5. **Automated Cloud Execution & Alerts (CI/CD):**
-   * Configured via **GitHub Actions** (`.github/workflows/update_data.yml`) to execute the full pipeline automatically twice a week, commit updated datasets/charts, and dispatch summary notifications via **Telegram Bot API** and **SMTP Email** using encrypted GitHub Secrets.
+   * Configured via **GitHub Actions** (`.github/workflows/update_data.yml`) to execute the full multi-retailer pipeline automatically twice a week, commit updated datasets and charts, and dispatch executive summaries with attached visualizations via **Telegram Bot API** and **SMTP Email** (`src/enviar_reporte.py`) using encrypted GitHub Secrets.
 
 ---
 
@@ -137,19 +140,19 @@ An analysis of the open-source **CockroachDB** repository confirms the use of th
 
 ## 🛠️ Technical Challenges & Troubleshooting
 
-During the development of the data collection and ETL pipeline, several real-world technical obstacles were identified and resolved:
+During the development of the multi-retailer data collection and ETL pipeline, several real-world technical obstacles were identified and resolved:
 
-1. **Dynamic Client-Side Rendering (CSR) & Endpoint Redirection:**
-   * *Issue:* Initial HTTP `GET` requests to Jumbo's internal VTEX routing endpoint (`_v/segment/routing/vtex.store@2.x/...`) triggered `JSONDecodeError` or redirected to the main homepage because prices are loaded dynamically via JavaScript and require active session cookies.
-   * *Solution:* Migrated the extraction module (`scraper_jumbo.py`) from static `requests` to **Playwright** (headless Chromium), simulating full browser navigation with explicit category query parameters (`initialMap`, `map`, `query`) and progressive scrolling to render all product cards.
+1. **Dynamic Client-Side Rendering (CSR) & Anti-Bot Protections:**
+   * *Issue:* Initial HTTP `GET` requests to VTEX routing endpoints triggered `JSONDecodeError` or redirected to homepages, while headless scraping on Carrefour encountered hidden search containers (`top-search`) and non-breaking space characters (`\xa0`) breaking price parsing.
+   * *Solution:* Migrated the extraction modules (`scraper_jumbo.py`, `scraper_carrefour.py`, `scraper_coto.py`) to **Playwright** with realistic browser headers, targeted visible product summary containers (`vtex-product-summary-2-x-container`), sanitized Unicode spaces (`\xa0`), and implemented URL pagination (`&page=1..8`) to capture **236+ unique SKUs**.
 
-2. **Unstructured Product Card Layout & UI Noise:**
-   * *Issue:* Product cards mixed brand names, full descriptions, promotional badges, and UI buttons (`"Ver Producto"`, `"Compra rápida"`), occasionally inverting brand and product fields or capturing non-target carousel items.
-   * *Solution:* Implemented a text-filtering pipeline that strips UI labels, selects the longest string as the product title, enforces a strict keyword filter (`"yerba"`), and uses regular expressions (`re`) to extract package weights (`500g`, `550g`, `1kg`) for accurate `ARS/kg` normalization.
+2. **Unstructured Product Card Layout & UI Noise Filtering:**
+   * *Issue:* Search results across retailers mixed target packages with non-target accessories (thermoses, empty tins, tea bags) and UI labels (`"Ver Producto"`, `"Ver planes de cuotas"`), occasionally inverting brand and product fields.
+   * *Solution:* Built a strict text-filtering pipeline that excludes accessory keywords and financing labels, prioritizes strings explicitly containing `"yerba"`, validates realistic `ARS/kg` bounds, and uses regular expressions (`re`) to extract package weights (`250g`, `500g`, `550g`, `1kg`).
 
 3. **Multi-Source Integration & Inflation Deflation:**
-   * *Issue:* Official reports from CEPA, Ministry of Deregulation/INYM, and INDEC (IPC) are published across different formats and nominal scales.
-   * *Solution:* Created `integrar_fuentes.py` to standardize periods (`YYYY-MM`), merge retail shelf prices with farm-gate leaf prices (`hoja verde`), calculate producer share percentages, and deflate nominal values into constant currency (Base Dec-2023 = 100).
+   * *Issue:* Official reports from CEPA, Ministry of Deregulation/INYM, and INDEC (IPC) are published across different formats and nominal scales, requiring synchronization with live multi-retailer medians.
+   * *Solution:* Created `etl_pipeline.py` and `integrar_fuentes.py` to unify daily scrapes across all three chains, standardize periods (`YYYY-MM`), merge retail medians with farm-gate leaf prices (`hoja verde`), calculate producer share percentages, and deflate nominal values into constant currency (Base Dec-2023 = 100).
 
 ---
 
@@ -168,20 +171,22 @@ During the development of the data collection and ETL pipeline, several real-wor
 
 ## 🔬 Methodological Scope, Data Provenance & Limitations
 
-To ensure analytical rigor and transparency, the historical integration module (`integrar_fuentes.py`) adheres to strict methodological boundaries:
+To ensure analytical rigor and transparency, the multi-retailer ETL (`etl_pipeline.py`) and historical integration module (`integrar_fuentes.py`) adhere to strict methodological boundaries:
 
-* **Data Provenance & Triangulation:** Official macroeconomic baselines are sourced from **INDEC** (National Consumer Price Index - IPC, Base Dec 2016) to deflate nominal values, while primary production costs (`hoja verde`) and value-chain spreads are triangulated from **Centro CEPA** sector reports (Jan 2025 & June 2026) and **INYM / Ministry of Deregulation** statistical releases.
+* **Data Provenance & Triangulation:** Official macroeconomic baselines are sourced from **INDEC** (National Consumer Price Index - IPC, Base Dec 2016) to deflate nominal values, while primary production costs (`hoja verde`) and value-chain spreads are triangulated from **Centro CEPA** sector reports (Jan 2025 & June 2026) and **INYM / Ministry of Deregulation** statistical releases. Live shelf prices are extracted across three major retail chains (**Jumbo**, **Carrefour**, and **Coto**, totaling ~236 active SKUs).
 * **Temporal Window Selection (2023–2026):** The integrated series intentionally focuses on the **October 2023 – November 2026** window to isolate the structural regime change triggered by **DNU 70/2023** (December 2023), capturing both the pre-deregulation baseline (regulated under Resolution 406/2023) and the subsequent free-market stabilization phase.
-* **Methodological Approach:** Farm-to-retail participation percentages are calculated using standard industrial conversion ratios (~3.0 kg of green leaf per 1.0 kg of processed retail yerba mate), comparing deflated series in constant December 2023 currency (`ARS Dic-23 = 100`).
+* **Methodological Approach & Robustness:** Farm-to-retail participation percentages are calculated using standard industrial conversion ratios (~3.0 kg of green leaf per 1.0 kg of processed retail yerba mate), comparing deflated series in constant December 2023 currency (`ARS Dic-23 = 100`). To prevent upward distortion from ultra-premium or imported brands (e.g., Uruguayan-style cuts exceeding $15,000/kg), the multi-retailer **median** (`ARS/kg`) is used as the primary benchmark indicator.
+* **Scope Limitations:** Live price scrapes reflect e-commerce list prices for the **AMBA / Buenos Aires** distribution region and exclude temporary bank-specific cashbacks or loyalty-card discounts that require authenticated user sessions.
 
 ---
 
 ## 📉 Statistical Projections & Analytical Disclaimer
 
-While this repository tracks historical trends and real-time retail dispersion, **it does not perform deterministic forecasting or speculative "futurology."**
+While this repository tracks historical trends and real-time multi-retailer dispersion, **it does not perform deterministic forecasting or speculative "futurology."**
 
-* **Scenario Estimation:** Any forward-looking references or trend lines derived from the ETL pipeline represent statistical extrapolations based on recent monthly IPC inertia (e.g., ~1.9% monthly baseline) and current retail medians.
-* **Disclaimer:** These figures are **analytical estimates** intended strictly for academic and exploratory monitoring. Real-world retail prices remain subject to exogenous macroeconomic shocks, seasonal harvest yields (Misiones/Corrientes), and commercial pricing strategies across retail chains.
+* **IPC Nowcasting & Scenario Estimation:** Because official INDEC Consumer Price Index (`IPC`) releases carry a publishing lag relative to live daily web scrapes, the current period (`2026-11`) applies a technical extrapolation based on recent monthly inflation inertia (~1.9% monthly baseline) to deflate the live multi-retailer median (**$5,289.62 ARS/kg** across 236 SKUs).
+* **Cross-Chain Variance Mitigation:** Aggregating data across three major retailers (**Carrefour**, **Coto**, and **Jumbo**) significantly reduces single-chain pricing noise, providing a more reliable baseline before formal time-series modeling is introduced.
+* **Analytical Disclaimer:** All projected figures and deflated series are **analytical estimates** intended strictly for academic, portfolio, and exploratory monitoring purposes. Real-world retail prices remain subject to exogenous macroeconomic shocks, seasonal harvest yields (Misiones/Corrientes), and dynamic promotional strategies across supermarket chains.
 
 ---
 
@@ -191,9 +196,10 @@ Building this system followed an **iterative engineering cycle** rather than a l
 
 1. **From Static Requests to Headless Automation:** Initial prototypes assumed static JSON endpoints would suffice. Testing against live retail infrastructure forced a pivot to **Playwright** and DOM-level text filtering, reinforcing the importance of empirical validation over assumptions.
 2. **From Local Scripts to Cloud CI/CD:** Moving from manual local execution (`src/`) to relative path resolution (`BASE_DIR`) and scheduled **GitHub Actions** transformed a one-off analysis into a self-updating monitoring system with real-time **Telegram** alerting.
-3. **Future Roadmap & Continuous Improvement:**
-   * *Multi-Retailer Expansion:* Incorporating additional supermarket chains (e.g., Carrefour, Coto) to eliminate single-retailer bias.
-   * *Time-Series Modeling:* Once the automated cron job accumulates 6+ months of high-frequency daily/weekly scrapes, implementing formal **ARIMA / Prophet** models with confidence intervals to evaluate seasonal price elasticity.
+3. **Single-Retailer to Multi-Channel Architecture (Completed Iteration):** Recognizing the sample bias of tracking only 18 SKUs in a single premium chain (Jumbo), the pipeline was expanded to integrate **Carrefour** and **Coto**, scaling coverage to **236+ live SKUs** and adding an executive dark-mode **Streamlit** interface for cross-chain comparison.
+4. **Future Roadmap & Continuous Improvement:**
+   * *Historical Database Persistence:* Migrating cumulative daily CSV snapshots into a structured relational database (**PostgreSQL / SQLite**) to track granular SKU-level price elasticity over time.
+   * *Time-Series Modeling:* Once the automated cron job accumulates 6+ months of high-frequency multi-retailer scrapes, implementing formal **SARIMA / Prophet** models with confidence intervals to forecast seasonal price dynamics.
 
 ---
 

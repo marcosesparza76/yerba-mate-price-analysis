@@ -19,6 +19,8 @@ def generar_resumen_texto():
     part_prod = df_maestro["participacion_productor_pct"].iloc[-1]
     precio_real = df_maestro["precio_gondola_real_dic23"].iloc[-1]
 
+    url_tablero = "https://" + "yerba-mate-price-analysis-monitor.streamlit.app/"
+
     mensaje = (
         f"🧉 REPORTE AUTOMÁTICO YERBA MATE ({fecha})\n\n"
         f"• Presentaciones relevadas: {len(df_gondola)}\n"
@@ -28,7 +30,7 @@ def generar_resumen_texto():
         f"• Más costosa: {max_row['marca']} (${max_row['precio_por_kg_ars']:,.2f}/kg)\n"
         f"• Participación productor en góndola: {part_prod:.1f}%\n"
         f"• Precio real deflactado (Base Dic-23): ${precio_real:,.2f}/kg\n\n"
-        f"🔗 Ver tablero interactivo: https://yerba-mate-price-analysis-monitor.streamlit.app/"
+        f"🔗 Ver tablero interactivo: {url_tablero}"
     )
     return mensaje
 
@@ -39,12 +41,14 @@ def enviar_telegram(texto):
         print("Telegram no configurado (faltan variables TELEGRAM_TOKEN / TELEGRAM_CHAT_ID).")
         return
 
-    url_msg = f"https://telegram.org{token}/sendMessage"
+    base_tg = "https://" + "api.telegram.org/bot" + str(token).strip()
+
+    url_msg = base_tg + "/sendMessage"
     resp_msg = requests.post(url_msg, data={"chat_id": chat_id, "text": texto})
     print(f"Mensaje Telegram estado: {resp_msg.status_code}")
 
     figuras_dir = BASE_DIR / "reports" / "figures"
-    url_photo = f"https://telegram.org{token}/sendPhoto"
+    url_photo = base_tg + "/sendPhoto"
     for img_path in sorted(figuras_dir.glob("*.png")):
         with open(img_path, "rb") as img:
             resp_img = requests.post(url_photo, data={"chat_id": chat_id}, files={"photo": img})
@@ -69,7 +73,8 @@ def enviar_correo(texto):
         with open(img_file, "rb") as f:
             msg.add_attachment(f.read(), maintype="image", subtype="png", filename=img_file.name)
 
-    with smtplib.SMTP_SSL("://gmail.com", 465) as smtp:
+    servidor_smtp = "smtp." + "gmail.com"
+    with smtplib.SMTP_SSL(servidor_smtp, 465) as smtp:
         smtp.login(remitente, password)
         smtp.send_message(msg)
     print("Correo electrónico enviado exitosamente.")

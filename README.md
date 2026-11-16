@@ -98,22 +98,19 @@ To run this project locally, ensure you have **Python 3.10+** installed.
    ```
    *Standardizes all package weights to `Price per Kg` and merges historical series with IPC inflation data into `data/processed/`.*
 
-3. **Explore Notebooks & Dashboard:**
-   * Open `notebooks/01_eda_historical.ipynb` in Jupyter or VS Code to inspect statistical charts.
-   * Open `dashboard/yerba_mate_bi.pbix` in Power BI Desktop to interact with the visual report.
-4. **Integrate Official Sources (INDEC IPC & CEPA):**
+3. **Integrate Official Sources (INDEC IPC & CEPA):**
    ```bash
    python src/integrar_fuentes.py
    ```
    *Merges live retail prices with official Consumer Price Index (IPC) and farm-gate leaf prices (`hoja verde`) into `data/processed/dataset_maestro_yerba.csv`.*
 
-5. **Launch the Interactive Web Dashboard:**
+4. **Launch the Interactive Web Dashboard:**
    ```bash
    python -m streamlit run dashboard/app.py
    ```
    *Opens the local Streamlit web application with dynamic brand filters, KPIs, and interactive Plotly charts.*
 
-6. **Automated Cloud Execution & Alerts (CI/CD):**
+5. **Automated Cloud Execution & Alerts (CI/CD):**
    * Configured via **GitHub Actions** (`.github/workflows/update_data.yml`) to execute the full pipeline automatically twice a week, commit updated datasets/charts, and dispatch summary notifications via **Telegram Bot API** and **SMTP Email** using encrypted GitHub Secrets.
 
 ---

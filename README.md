@@ -33,19 +33,26 @@ Following standard Data Science repository conventions, the project is organized
 
 ```text
 yerba-mate-price-analysis/
-├── data/
-│   ├── raw/                  # Unmodified datasets (CSV/Excel from official reports & raw scrapes)
-│   └── processed/            # Cleaned, normalized (ARS/kg), and IPC-deflated datasets
-├── notebooks/
-│   ├── 01_eda_historical.ipynb       # Exploratory Data Analysis (2015-2025)
-│   └── 02_inflation_comparison.ipynb # Nominal vs. Real price modeling
-├── src/
-│   ├── scraper_jumbo.py      # Web scraper for real-time retail prices (Jumbo)
-│   └── etl_pipeline.py       # Data cleaning, unit normalization, and IPC adjustment scripts
+├── .github/
+│   └── workflows/
+│       └── update_data.yml           # Automated CI/CD pipeline (runs Mon & Thu)
 ├── dashboard/
-│   └── yerba_mate_bi.pbix    # Power BI interactive executive report
-├── requirements.txt          # Python dependencies
-└── README.md                 # Project documentation
+│   └── app.py                        # Interactive Streamlit & Plotly web dashboard
+├── data/
+│   ├── raw/                          # Raw scrapes (Jumbo) & official datasets (INDEC, CEPA)
+│   └── processed/                    # Cleaned, normalized (ARS/kg) & IPC-deflated datasets
+├── notebooks/
+│   └── 01_eda_historical.ipynb       # Exploratory Data Analysis notebooks
+├── reports/
+│   └── figures/                      # Automated statistical charts (PNG)
+├── src/
+│   ├── scraper_jumbo.py              # Headless browser scraper (Playwright)
+│   ├── etl_pipeline.py               # Unit normalization & statistical reporting
+│   ├── integrar_fuentes.py           # Multi-source join (Jumbo + INDEC IPC + CEPA)
+│   └── enviar_reporte.py             # Automated Telegram & Email alert dispatcher
+├── requirements.txt                  # Python dependencies
+└── README.md                         # Project documentation
+
 ```
 
 ---

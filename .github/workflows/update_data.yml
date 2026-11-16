@@ -39,6 +39,8 @@ jobs:
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
         run: |
           python src/scraper_jumbo.py
+          python src/scraper_carrefour.py
+          python src/scraper_coto.py
           python src/etl_pipeline.py
           python src/integrar_fuentes.py
           python src/enviar_reporte.py

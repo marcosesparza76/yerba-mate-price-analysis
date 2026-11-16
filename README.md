@@ -1,6 +1,7 @@
 ## 📋 Overview
 
 **Yerba Mate Price Tracker** is an end-to-end Data Science and Business Intelligence project designed to collect, process, and analyze the historical and real-time price evolution of Yerba Mate in Argentina. 
+> 🚀 **Live Interactive Dashboard:** Explore real-time shelf prices, brand dispersion, and inflation-adjusted historical trends at **[Yerba Mate Price Monitor (Streamlit App)](https://yerba-mate-price-analysis-monitor.streamlit.app)**.
 
 The project evaluates the market impact of the **DNU 70/2023** deregulation (which eliminated price controls previously set by the *National Institute of Yerba Mate - INYM*), measures the price gap between primary producers and retail shelves, and compares nominal price increases against general inflation using the **Consumer Price Index (IPC - INDEC)**.
 

@@ -153,14 +153,14 @@ During the development of the data collection and ETL pipeline, several real-wor
 
 ## 📈 Key Findings & Visualizations
 
-* **Current Retail Dispersion (Jumbo):** Average price of **$6,523.26 ARS/kg** (Median: **$5,472.82 ARS/kg** across 18 presentations), ranging from **$3,396.25/kg** (*Nobleza Gaucha*) to **$15,800.00/kg** (*Canarias*).
-* **Deregulation & Producer Share Impact:** Following **DNU 70/2023**, real shelf prices peaked in early 2024 before stabilizing, while the primary producer's share of the final retail price contracted from **34.9%** (Oct 2023) to **13.3%–16.1%** (2025–2026).
+* **Multi-Retailer Dispersion (236 Live SKUs):** El mercado promedia **$5,755.68 ARS/kg** (Mediana: **$5,289.62 ARS/kg**) entre **Carrefour**, **Coto** y **Jumbo**, con un rango de **$3,438.00/kg** a **$21,260.00/kg**.
+* **Cross-Chain Price Positioning:** **Carrefour** lidera en competitividad (**$5,199.00/kg** en 95 SKUs), seguido por **Coto** (**$5,380.00/kg** en 123 SKUs) y **Jumbo** (**$5,472.82/kg** en 18 SKUs, con mayor presencia de marcas premium).
+* **Deregulation & Producer Share Impact:** Tras el **DNU 70/2023**, los precios reales sestabilizaron tras un pico en 2024, mientras que la participación del productor primario cayó del **34.9%** (Oct 2023) al **13.3%–16.4%** (2025–2026).
 
-![Brand Price Ranking](reports/figures/01_ranking_precios_marca.png)
-![Historical Price Evolution](reports/figures/02_evolucion_historica_dnu.png)
-![Producer Share vs Real Retail Price](reports/figures/03_brecha_productor_ipc.png)
-
----
+![Brand Price Ranking](https://github.com)
+![Historical Price Evolution](https://github.com)
+![Producer Share vs Real Retail Price](https://github.com)
+![Retail Chain Comparison](https://github.com)
 
 ---
 

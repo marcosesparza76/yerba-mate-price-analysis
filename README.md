@@ -236,7 +236,7 @@ Cross-referencing hardware prices with regulated utility tariffs and climate dat
 <ul>
   <li><strong>Solar Equipment Cost Monitor (<code>USD / Watt-peak</code>):</strong> Scrape prices and specs of monocrystalline panels, hybrid inverters, and lithium batteries; use Regex to extract nominal power (<code>450W</code>, <code>550W</code>, <code>5kW</code>) and normalize costs to <code>USD/Wp</code> or <code>USD/kWh</code> against daily exchange rates, alerting via Telegram when costs hit target thresholds.</li>
   <li><strong>Automated Solar ROI Calculator:</strong> Merge installation costs with regional utility tariff schedules (Edenor, Edesur, EPE, EPEC) or <strong>CAMMESA</strong> reports to visualize residential/industrial payback periods in Streamlit.</li>
-  <li><strong>Wind/Solar Generation & Grid Monitoring:</strong> Query daily public renewable generation reports from <strong>SADI</strong> (CAMMESA) to dispatch Telegram summaries on clean-energy demand coverage and weather forecasts.</li>
+  <li><strong>Wind/Solar Generation & Grid Monitoring:</strong> Query daily public renewable generation reports from <strong>SADI</strong> (CAMMESA) to dispatch summaries on clean-energy demand coverage and weather forecasts.</li>
 </ul>
 </details>
 

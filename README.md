@@ -159,9 +159,9 @@ During the development of the multi-retailer data collection and ETL pipeline, s
 
 ## 📈 Key Findings & Visualizations
 
-* **Multi-Retailer Dispersion (236 Live SKUs):** El mercado promedia **$5,755.68 ARS/kg** (Mediana: **$5,289.62 ARS/kg**) entre **Carrefour**, **Coto** y **Jumbo**, con un rango de **$3,438.00/kg** a **$21,260.00/kg**.
-* **Cross-Chain Price Positioning:** **Carrefour** lidera en competitividad (**$5,199.00/kg** en 95 SKUs), seguido por **Coto** (**$5,380.00/kg** en 123 SKUs) y **Jumbo** (**$5,472.82/kg** en 18 SKUs, con mayor presencia de marcas premium).
-* **Deregulation & Producer Share Impact:** Tras el **DNU 70/2023**, los precios reales sestabilizaron tras un pico en 2024, mientras que la participación del productor primario cayó del **34.9%** (Oct 2023) al **13.3%–16.4%** (2025–2026).
+* **Multi-Retailer Dispersion (236 Live SKUs):** The retail market averages **$5,755.68 ARS/kg** (Median: **$5,289.62 ARS/kg**) across **Carrefour**, **Coto**, and **Jumbo**, ranging from **$3,438.00/kg** to **$21,260.00/kg**.
+* **Cross-Chain Price Positioning:** **Carrefour** leads in median price competitiveness (**$5,199.00/kg** across 95 SKUs), followed by **Coto** (**$5,380.00/kg** across 123 SKUs) and **Jumbo** (**$5,472.82/kg** across 18 SKUs, driven by a higher share of premium brands).
+* **Deregulation & Producer Share Impact:** Following **DNU 70/2023**, inflation-adjusted shelf prices stabilized after an early 2024 peak, while the primary producer's share of the final retail price contracted from **34.9%** (Oct 2023) to **13.3%–16.4%** (2025–2026).
 
 ![Brand Price Ranking](https://github.com/marcosesparza76/yerba-mate-price-analysis/blob/main/reports/figures/01_ranking_precios_marca.png)
 ![Historical Price Evolution](https://github.com/marcosesparza76/yerba-mate-price-analysis/blob/main/reports/figures/02_evolucion_historica_dnu.png)

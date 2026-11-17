@@ -66,7 +66,7 @@ To run this project locally, ensure you have **Python 3.10+** installed.
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com
+   git clone https://github.com/marcosesparza76/yerba-mate-price-analysis.git
    cd yerba-mate-price-analysis
    ```
 
@@ -82,6 +82,7 @@ To run this project locally, ensure you have **Python 3.10+** installed.
 3. **Install required dependencies:**
    ```bash
    pip install -r requirements.txt
+   playwright install chromium
    ```
    *(Core libraries include `pandas`, `numpy`, `matplotlib`, `seaborn`, `requests`, and `beautifulsoup4`.)*
 

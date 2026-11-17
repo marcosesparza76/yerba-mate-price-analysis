@@ -234,7 +234,7 @@ The underlying architecture built for this repository (**Dynamic Scraping with P
 <br>
 Cross-referencing hardware prices with regulated utility tariffs and climate data allows automated profitability tracking for distributed generation projects (e.g., Law 27,424 in Argentina):
 <ul>
-  <li><strong>Solar Equipment Cost Monitor (<code>USD / Watt-peak</code>):</strong> Scrape prices and specs of monocrystalline panels, hybrid inverters, and lithium batteries; use Regex to extract nominal power (<code>450W</code>, <code>550W</code>, <code>5kW</code>) and normalize costs to <code>USD/Wp</code> or <code>USD/kWh</code> against daily exchange rates, alerting via Telegram when costs hit target thresholds.</li>
+  <li><strong>Solar Equipment Cost Monitor (<code>USD / Watt-peak</code>):</strong> Scrape prices and specs of monocrystalline panels, hybrid inverters, and lithium batteries; use Regex to extract nominal power (<code>450W</code>, <code>550W</code>, <code>5kW</code>) and normalize costs to <code>USD/Wp</code> or <code>USD/kWh</code> against daily exchange rates, alerting when costs hit target thresholds.</li>
   <li><strong>Automated Solar ROI Calculator:</strong> Merge installation costs with regional utility tariff schedules (Edenor, Edesur, EPE, EPEC) or <strong>CAMMESA</strong> reports to visualize residential/industrial payback periods in Streamlit.</li>
   <li><strong>Wind/Solar Generation & Grid Monitoring:</strong> Query daily public renewable generation reports from <strong>SADI</strong> (CAMMESA) to dispatch summaries on clean-energy demand coverage and weather forecasts.</li>
 </ul>
@@ -245,7 +245,7 @@ Cross-referencing hardware prices with regulated utility tariffs and climate dat
 <br>
 Automated data pipelines serve as the backbone for infrastructure observability, cloud cost governance, and tech labor market analytics:
 <ul>
-  <li><strong>Cloud Cost Auditing (Automated <em>FinOps</em>):</strong> Query daily server usage across <strong>AWS, Azure, or Google Cloud</strong> against monthly project budgets, triggering critical Telegram alerts if anomalous consumption spikes occur outside business hours.</li>
+  <li><strong>Cloud Cost Auditing (Automated <em>FinOps</em>):</strong> Query daily server usage across <strong>AWS, Azure, or Google Cloud</strong> against monthly project budgets, triggering critical alerts if anomalous consumption spikes occur outside business hours.</li>
   <li><strong>Vulnerability & Critical Patch Radar (<em>SecOps</em>):</strong> Monitor security bulletins (<strong>CISA, NVD</strong>) and changelogs for core stack dependencies (Python, Docker, Linux, PostgreSQL), filtering for high/critical severity (<code>CVSS >= 8.0</code>) to alert IT teams immediately.</li>
   <li><strong>Tech Salary & Skill Demand Observatory:</strong> Scrape IT job boards (LinkedIn Jobs, Get on Board, Indeed) for roles like <em>Data Engineer</em>, <em>ML Engineer</em>, or <em>DevOps</em>, counting weekly keyword frequency (<code>Python</code>, <code>SQL</code>, <code>Docker</code>, <code>AWS</code>, <code>Playwright</code>) and salary bands.</li>
   <li><strong>Availability & Latency Monitor (<em>Synthetic Monitoring</em>):</strong> Use scheduled GitHub Actions workflows to verify internal APIs, SSL certificates, and corporate endpoints (<code>200 OK</code>) and measure response latency in milliseconds, sending instant downtime alerts.</li>

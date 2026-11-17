@@ -1,18 +1,5 @@
 ## 📋 Overview
 
-<p align="left">
-  <a href="https://github.com">
-    <img src="https://github.com/badge.svg" alt="CI/CD Pipeline">
-  </a>
-  <a href="https://streamlit.app">
-    <img src="https://shields.io" alt="Streamlit App">
-  </a>
-  <img src="https://shields.io" alt="Python">
-  <img src="https://shields.io" alt="Playwright">
-  <img src="https://shields.io" alt="Pandas">
-  <img src="https://shields.io" alt="License: MIT">
-</p>
-
 **Yerba Mate Price Tracker** is an automated, end-to-end Data Engineering and Econometric Analytics pipeline designed to collect, process, and monitor the historical and real-time multi-retailer price evolution of Yerba Mate in Argentina (**Jumbo**, **Carrefour**, and **Coto**).
 ![Executive Dashboard Preview](reports/figures/dashboard_preview.png)
 > 🚀 **Live Executive Dashboard:** Explore real-time cross-chain prices (236+ SKUs), brand dispersion, and inflation-adjusted historical trends at **[Yerba Mate Price Monitor (Streamlit App)](https://streamlit.app)**.

@@ -248,7 +248,7 @@ Automated data pipelines serve as the backbone for infrastructure observability,
   <li><strong>Cloud Cost Auditing (Automated <em>FinOps</em>):</strong> Query daily server usage across <strong>AWS, Azure, or Google Cloud</strong> against monthly project budgets, triggering critical Telegram alerts if anomalous consumption spikes occur outside business hours.</li>
   <li><strong>Vulnerability & Critical Patch Radar (<em>SecOps</em>):</strong> Monitor security bulletins (<strong>CISA, NVD</strong>) and changelogs for core stack dependencies (Python, Docker, Linux, PostgreSQL), filtering for high/critical severity (<code>CVSS >= 8.0</code>) to alert IT teams immediately.</li>
   <li><strong>Tech Salary & Skill Demand Observatory:</strong> Scrape IT job boards (LinkedIn Jobs, Get on Board, Indeed) for roles like <em>Data Engineer</em>, <em>ML Engineer</em>, or <em>DevOps</em>, counting weekly keyword frequency (<code>Python</code>, <code>SQL</code>, <code>Docker</code>, <code>AWS</code>, <code>Playwright</code>) and salary bands.</li>
-  <li><strong>Availability & Latency Monitor (<em>Synthetic Monitoring</em>):</strong> Use scheduled GitHub Actions workflows to verify internal APIs, SSL certificates, and corporate endpoints (<code>200 OK</code>) and measure response latency in milliseconds, sending instant downtime alerts to Telegram.</li>
+  <li><strong>Availability & Latency Monitor (<em>Synthetic Monitoring</em>):</strong> Use scheduled GitHub Actions workflows to verify internal APIs, SSL certificates, and corporate endpoints (<code>200 OK</code>) and measure response latency in milliseconds, sending instant downtime alerts.</li>
 </ul>
 </details>
 
